@@ -15,9 +15,6 @@ class Game:
 
         spielaktiv = True
 
-        x = 250
-        y = 250
-
         while spielaktiv:
 
             for event in pygame.event.get():
