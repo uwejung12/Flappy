@@ -11,6 +11,8 @@ class Flappy():
     def draw(self, screen):
         screen.blit(self.flappy, self.rect)
 
-
     def move(self):
         self.rect.centery += 1
+
+    def up(self):
+        self.rect.centery -= 40
