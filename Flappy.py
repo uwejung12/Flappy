@@ -15,4 +15,5 @@ class Flappy():
         self.rect.centery += 1
 
     def up(self):
-        self.rect.centery -= 40
+        self.rect.centery -= 20
+        
