@@ -3,39 +3,47 @@ import config
 import Flappy
 
 class Game:
-    def __init__(self, mode):
-        self.mode = mode
+    def __init__(self):
         self.FPS = 100
 
-    def run(self):
+    def reset(self):
         pygame.init()
-        clock = pygame.time.Clock()
-        screen = pygame.display.set_mode([config.widht, config.height])
+        self.clock = pygame.time.Clock()
+        self.screen = pygame.display.set_mode([config.widht, config.height])
+        self.flappy = Flappy.Flappy(self.screen)
+        self.timer = 0
+        self.done = False
 
-        flappy = Flappy.Flappy(screen)
+    def step(self, space):
+        # while spielaktiv:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                spielaktiv = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    print("Spieler hat Leertaste gedrückt")
+                    self.flappy.up()
 
-        spielaktiv = True
+        if space == 1:
+            self.flappy.up()
 
-        x = 250
-        y = 250
+        self.screen.fill((255, 255, 255))
 
-        while spielaktiv:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    spielaktiv = False
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
-                        print("Spieler hat Leertaste gedrückt")
-                        flappy.up()
+        self.flappy.draw(self.screen)
 
-            screen.fill((255, 255, 255))
+        self.flappy.move()
 
-            flappy.draw(screen)
+        pygame.display.flip()
 
-            flappy.move()
-            # flappy.up()
+        self.clock.tick(self.FPS)
 
-            pygame.display.flip()
-            clock.tick(self.FPS)
+        if self.timer == 100:
+            self.done = True
+            pygame.quit()
+        else:
+            self.timer += 1
 
-        pygame.quit()
+        reward = 1
+        return reward, self.done
+
+    # pygame.quit()
