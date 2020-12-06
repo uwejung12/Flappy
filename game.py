@@ -13,6 +13,7 @@ class Game:
         self.flappy = Flappy.Flappy(self.screen)
         self.timer = 0
         self.done = False
+        self.reward = 0
 
     def step(self, space):
         # while spielaktiv:
@@ -37,13 +38,14 @@ class Game:
 
         self.clock.tick(self.FPS)
 
-        if self.timer == 100:
+        if self.timer == 99:
             self.done = True
             pygame.quit()
         else:
             self.timer += 1
 
-        reward = 1
-        return reward, self.done
+        self.reward += 1
+
+        return self.reward, self.done
 
     # pygame.quit()

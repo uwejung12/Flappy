@@ -2,7 +2,7 @@ import game
 
 Flappy = game.Game()
 
-def run_cont():
+def run_controlled():
     for j in range(20):
         Flappy.reset()
         done = False
@@ -13,6 +13,7 @@ def run_cont():
             else:
                 rew, done = Flappy.step(0)
             i += 1
+        print("rewared: ", rew)
 
 def run_user():
     Flappy.reset()
@@ -21,5 +22,5 @@ def run_user():
     while not done:
         rew, done = Flappy.step(0)
 
-run_cont()
+run_controlled()
 # run_user()
